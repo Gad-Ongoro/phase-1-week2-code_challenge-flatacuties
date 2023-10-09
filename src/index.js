@@ -1,4 +1,7 @@
 // Your code here
+let addVotesButton = document.querySelector("input[type='submit']");
+let votesInput = document.querySelector("input#votes");
+let voteCount = document.querySelector("span#vote-count");
 
 //Prevents a form's default submit behaviour when the submit button is clicked
 function removeDef() {
@@ -16,9 +19,6 @@ function eachChar(char){
     let charImage = document.querySelector("img#image")
     let charBar = document.querySelector("div#character-bar");
     let charName = document.createElement("div.charDiv");
-    let votesInput = document.querySelector("input#votes");
-    let addVotesButton = document.querySelector("input[type='submit']");
-    let voteCount = document.querySelector("span#vote-count");
     let resetBtn = document.querySelector("button#reset-btn");
 
     charName.innerHTML = `
@@ -29,18 +29,12 @@ function eachChar(char){
 
     charBar.appendChild(charName);
 
-    charName.addEventListener("click", function(e){
+    charName.addEventListener("click", function(){
         nameP.innerHTML = char.name;
         charImage.src = char.image;
         voteCount.innerHTML = 0;
     });
-    addVotesButton.addEventListener("click", function(e){
-        if (e = true) {
-            voteCount.innerHTML = 0;
-            voteCount.innerHTML = parseInt(votesInput.value);
-            voteCount.innerHTML = voteCount.innerHTML;
-        }
-    });
+
     resetBtn.addEventListener("click", function(){
         voteCount.innerHTML = 0;
     })
@@ -59,6 +53,12 @@ function jsonDataFetcher1(){
     });
 }
 jsonDataFetcher1();
+
+addVotesButton.addEventListener("click", function(){
+    let currentInputValue = parseInt(votesInput.value, 10);
+    voteCount.innerHTML = parseInt(voteCount.innerHTML, 10) + currentInputValue;
+    //console.log(currentInputValue);
+});
 
 //styles
 document.querySelector('form input[type="submit"]').style.cursor = "pointer";
